@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Dec 06, 2020 at 02:24 PM
+-- Generation Time: Dec 13, 2020 at 08:05 PM
 -- Server version: 8.0.21
 -- PHP Version: 7.3.21
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `pepiniere`
 --
-CREATE DATABASE IF NOT EXISTS `pepiniere` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
-USE `pepiniere`;
 
 -- --------------------------------------------------------
 
@@ -36,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `panier` (
   `idProduit` int NOT NULL,
   PRIMARY KEY (`idProduitPanier`),
   KEY `fk_foreign_id_produit` (`idProduit`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -53,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `produits` (
   `imageProduit` varchar(255) NOT NULL,
   `quantiteProduit` int NOT NULL,
   PRIMARY KEY (`idProduit`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `produits`
@@ -61,7 +59,10 @@ CREATE TABLE IF NOT EXISTS `produits` (
 
 INSERT INTO `produits` (`idProduit`, `nomProduit`, `prixProduit`, `descriptionProduit`, `imageProduit`, `quantiteProduit`) VALUES
 (1, 'Pin rouge', 45.00, 'Le pin rouge, pin résineux ou pin de Norvège, est un arbre appartenant au genre Pinus et à la famille des Pinacées.', 'public\\images\\pin.jpg', 50),
-(2, 'Mélèze', 35.00, 'Mélèze est un nom vernaculaire ambigu en français. On appelle « mélèze » divers arbres des régions tempérées de l\'hémisphère nord.', 'public\\images\\meleze.jpg', 30);
+(2, 'Mélèze', 35.00, 'Mélèze est un nom vernaculaire ambigu en français. On appelle « mélèze » divers arbres des régions tempérées de l\'hémisphère nord.', 'public\\images\\meleze.jpg', 30),
+(3, 'Sac de chaux', 10.00, 'La chaux hydraulique blanche naturelle pure NHL 3,5 permet la réalisation de mortiers traditionnels, particulièrement appréciés pour la restauration et la réhabilitation de bâtiments anciens. Elle peut aussi être employée pour les travaux neufs, pure ou b', 'public\\images\\chaux.jpg', 10),
+(4, 'Pelle', 25.00, 'Pelle profonde pour ramasser aisément les produits absorbants, les grains et les graines en vrac.', '	\r\npublic\\images\\pelle.jpg', 20),
+(5, 'Sac', 5.00, 'Sac pour résidus de jardin.', 'public\\images\\sac.jpg', 200);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
