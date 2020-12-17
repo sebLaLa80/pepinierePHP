@@ -28,12 +28,33 @@ h3
 }
 body {
 	margin: 0px;
-	background-color: #c1d6c7;
+	background-color: #9ea77bc4;
 }
 
 .contenu {
-	margin-top: 100px;
+	margin-top: 80px;
+	margin-right: 200px;
+	margin-left: 200px;
+	background-color: #b3d8b8;
+	padding-left: 200px;
+	padding-right: 200px;
 }
 .produit{
 	margin: 0 auto;
+	text-align:left;
+}
+
+.pied{
+	text-align:center;
+}
+
+.produitPanier{
+	margin: 0 auto;
+}
+tr, th {
+	width: 150px;
+	text-align:left;
+}
+.inversion{
+	filter: invert(1);
 }

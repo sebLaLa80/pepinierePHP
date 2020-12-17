@@ -23,23 +23,31 @@ function afficherProduit($idProduit){
 
 function ajouterAuPanier($idProduit, $from){
     $panierManager = new PanierManager();
+    $produitManager = new ProduitManager();
+
+    if ($panierManager->verifierQtyStock($idProduit) > 0){
    
-    $lignesAffectees = $panierManager->ajouterAuPanier($idProduit);
+        $lignesAffectees = $panierManager->ajouterAuPanier($idProduit);
 
-    $nombreArticles = getNombrePanier();
+        $nombreArticles = getNombrePanier();
 
-    //Vérifier si une ligne a été affectée
-    if($lignesAffectees > 0){
-        //Le travail du controleur est "terminé", il n'y a pas de vue associée  supprimerDuPanier($idProduit)
+        //Vérifier si une ligne a été affectée
+        if($lignesAffectees > 0){
+            //Le travail du controleur est "terminé", il n'y a pas de vue associée  supprimerDuPanier($idProduit)
 
-        if ($from == "panier"){
-            header("Location:index.php?action=afficherPanier"); 
+            $produitManager->supprimerUnQty($idProduit);
+
+            if ($from == "panier"){
+                header("Location:index.php?action=afficherPanier"); 
+            }else{
+                header("Location:index.php");
+            }
         }else{
-            header("Location:index.php");
+            echo "Ajout impossible";
         }
-    }else{
-        echo "Ajout impossible";
+
     }
+    echo "Ajout impossible - qty insuffisante";
 }
 
 function getPanier(){
@@ -63,6 +71,9 @@ function getNombrePanier(){
 
 function supprimerDuPanier($idProduit){
     $panierManager = new PanierManager();
+    $produitManager = new ProduitManager();
+
+    $qtyProduit = $panierManager->getQtyProduit($idProduit);
    
     $lignesAffectees = $panierManager->supprimerDuPanier($idProduit);
 
@@ -70,6 +81,10 @@ function supprimerDuPanier($idProduit){
 
     //Vérifier si une ligne a été affectée
     if($lignesAffectees > 0){
+
+        
+        $produitManager->ajouterQty($idProduit, $qtyProduit);
+
         //Le travail du controleur est "terminé", il n'y a pas de vue associée  supprimerDuPanier($idProduit)
         
         header("Location:index.php?action=afficherPanier");

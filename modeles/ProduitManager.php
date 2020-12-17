@@ -26,6 +26,20 @@ require_once("Manager.php");
             return $req->fetch();
         
         }
+
+        function supprimerUnQty($idProduit){
+            $bdd = $this->connexionBD();
+
+            $req = $bdd->prepare("UPDATE produits SET quantiteProduit = quantiteProduit -1 where idProduit=$idProduit");
+            $req->execute();
+        }
+
+        function ajouterQty($idProduit, $QTY){
+            $bdd = $this->connexionBD();
+
+            $req = $bdd->prepare("UPDATE produits SET quantiteProduit = quantiteProduit + $QTY where idProduit=$idProduit");
+            $req->execute();
+        }
         
 
     }

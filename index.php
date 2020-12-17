@@ -1,8 +1,11 @@
 <?php
+    
     require("controleurs/controleurs.php");
     //Routeur. Genre de super-controlleur qui choisit quel contrôleur appeler selon l'action demandée 
 
-
+    session_start();
+    setlocale (LC_TIME, 'fr_CA','fra');
+    $_SESSION["date"] = strftime('%d %B %Y');
 
 
     if(isset($_GET["action"])){

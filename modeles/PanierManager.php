@@ -18,34 +18,35 @@ class PanierManager extends Manager{
 
     function ajouterAuPanier($idProduit){
 
-        $bdd = $this->connexionBD();
+            $bdd = $this->connexionBD();
 
-        //verifier si l'item est deja dans le panier
-       
-        $req = $bdd->prepare('SELECT * from panier WHERE idProduit = :idProduit');
-            $req->execute(array(
-                "idProduit"=> $idProduit
+            //verifier si l'item est deja dans le panier
+        
+            $req = $bdd->prepare('SELECT * from panier WHERE idProduit = :idProduit');
+                $req->execute(array(
+                    "idProduit"=> $idProduit
+                ));
+
+            $count = $req->rowCount();
+
+            //si l'item n'est pas dans le panier on ajoute
+            
+            if ($count < 1){ 
+                $req = $bdd->prepare("INSERT INTO panier(quantiteProduit, idProduit) VALUES(:quantiteProduit, :idProduit)");
+                $req->execute(array(
+                "quantiteProduit"=>1,
+                "idProduit"=>$idProduit
             ));
 
-        $count = $req->rowCount();
+            //si l'item est dans le panier on incremente la qty
 
-        //si l'item n'est pas dans le panier on ajoute
-        
-        if ($count < 1){ 
-            $req = $bdd->prepare("INSERT INTO panier(quantiteProduit, idProduit) VALUES(:quantiteProduit, :idProduit)");
-            $req->execute(array(
-            "quantiteProduit"=>1,
-            "idProduit"=>$idProduit
-        ));
+            }else{ 
+                $req = $bdd->prepare("UPDATE panier SET quantiteProduit = quantiteProduit +1 where idProduit=$idProduit");
+                $req->execute();
+            }
 
-        //si l'item est dans le panier on incremente la qty
-
-        }else{ 
-            $req = $bdd->prepare("UPDATE panier SET quantiteProduit = quantiteProduit +1 where idProduit=$idProduit");
-            $req->execute();
-        }
-
-        return $req->rowCount();
+            return $req->rowCount();
+            
 
     }
 
@@ -71,6 +72,39 @@ class PanierManager extends Manager{
         $row = $req->fetch(PDO::FETCH_ASSOC);
 
         return $row['total'];
+
+    }
+
+    function verifierQtyStock($idProduit){
+
+        $bdd = $this->connexionBD();
+
+        //verifier si l'item est en stock
+       
+        $req = $bdd->prepare('SELECT quantiteProduit from produits WHERE idProduit = :idProduit');
+            $req->execute(array(
+                "idProduit"=> $idProduit
+            ));
+        
+        $row = $req->fetch();
+
+        return $row['quantiteProduit'];
+        
+    }
+
+    function getQtyProduit($idProduit){
+
+        $bdd = $this->connexionBD();
+
+        $req = $bdd->prepare("SELECT quantiteProduit from panier WHERE idProduit = :idProduit");
+
+        $req->execute(array(
+            "idProduit"=> $idProduit
+        ));
+
+        $row = $req->fetch();
+
+        return $row['quantiteProduit'];
 
     }
     
