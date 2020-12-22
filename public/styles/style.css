@@ -58,3 +58,10 @@ tr, th {
 .inversion{
 	filter: invert(1);
 }
+
+#myimg {
+	position: absolute;
+	opacity: 0.5;
+	width: 30px;
+	z-index: 1000;
+}

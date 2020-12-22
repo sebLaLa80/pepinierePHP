@@ -8,7 +8,7 @@ require_once("Manager.php");
 
             $bdd = $this->connexionBD();
         
-            $req = $bdd->prepare('SELECT * from produits');
+            $req = $bdd->prepare('SELECT * from produits ORDER BY nomproduits');
             $req->execute(array());
         
             return $req;

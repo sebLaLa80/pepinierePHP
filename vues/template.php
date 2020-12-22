@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <title><?= $titre ?></title>
 	<link href="public/styles/style.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
         
     <body>
@@ -25,6 +26,8 @@
         <p>Dernière mise à jour le 16 décembre 2020 </p>
     </div>
 
+    <img src="./public/images/tree.png" class="follow" id="myimg"/>
+
     </body>
 
     <script>
@@ -40,6 +43,19 @@
                             console.log("4");
                         }
                     }
+
+        $("body").mousemove(function(e){
+            $('.follow').css({'top': e.clientY - 50, 'left': e.clientX - 50});
+        });
+
+        $("#b2").mouseover(function(){
+          $("#b2").animate({
+            left: '100px',
+            opacity: '0.5',
+            height: '100px',
+            width: '100px'
+          });
+        });
 
     </script>
 

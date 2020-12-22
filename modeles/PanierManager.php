@@ -11,7 +11,6 @@ class PanierManager extends Manager{
         $req = $bdd->prepare('SELECT produits.idProduit, produits.nomProduit, produits.prixProduit, panier.quantiteProduit from produits, panier WHERE produits.idProduit = panier.idProduit');
         $req->execute();
     
-        
         return $req;
     
     }

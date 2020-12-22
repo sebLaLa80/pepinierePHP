@@ -7,11 +7,9 @@
     setlocale (LC_TIME, 'fr_CA','fra');
     $_SESSION["date"] = strftime('%d %B %Y');
 
-
     if(isset($_GET["action"])){
         if($_GET["action"] == "afficher" && isset($_GET["idProduit"])){ 
             afficherProduit($_GET["idProduit"]);
-            
         
         }else if($_GET["action"] == "ajouter" && isset($_GET["idProduit"]) && isset($_GET["from"])){
              ajouterAuPanier($_GET["idProduit"], $_GET["from"]);
